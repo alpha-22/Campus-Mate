@@ -22,9 +22,12 @@ const Navbar = () => {
             <li class="nav-item">
             <Link class="nav-link active" aria-current="page" to="/">Home</Link>
             </li>
-            <li class="nav-item">
+            {localStorage.getItem("Sid")?<li class="nav-item">
             <Link class="nav-link" to="/subpro">Profile</Link>
-            </li>
+            </li>:<li class="nav-item">
+            <Link class="nav-link disabled" to="/subpro">Profile</Link>
+            </li>}
+            {localStorage.getItem("Sid")?<>
             {!localStorage.getItem("SUB1")?<li class="nav-item">
             <Link class="nav-link" to="/getsub">Registration</Link>
             </li>:<li class="nav-item">
@@ -34,7 +37,7 @@ const Navbar = () => {
             <Link class="nav-link" to="/subswt">Switching</Link>
             </li>:<li class="nav-item">
             <Link class="nav-link disabled" to="/subswt">Switching</Link>
-            </li>}
+            </li>}</>:<></>}
         </ul>
         </div>
         {!localStorage.getItem('Sid')?<form className="d-flex"> 

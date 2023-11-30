@@ -9,7 +9,11 @@ function GetSubs() {
   const [subphy, setSubphy] = useState([]);
   const [subcs, setSubcs] = useState([]);
   const [subec, setSubec] = useState([]);
-
+  const [dissubhss, setdisSubhss] = useState([]);
+  const [dissubmath, setdisSubmath] = useState([]);
+  const [dissubphy, setdisSubphy] = useState([]);
+  const [dissubcs, setdisSubcs] = useState([]);
+  const [dissubec, setdisSubec] = useState([]);
   const onOptionChangeHandler = (event) => {
 
     setData(event.target.value);
@@ -25,7 +29,10 @@ useEffect(() => {
   axios.post(`http://localhost:5000/getsub/get`, { Subject: "hss", Sem:localStorage.getItem('Sem') })
     .then((response) => {
       console.log(response.data);
-      setSubhss(response.data);
+      
+      const { info, disinfo } = response.data;
+      setSubhss(info);
+      setdisSubhss(disinfo);
     })
     .catch((error) => {
       console.error("Error fetching data:", error);
@@ -33,7 +40,9 @@ useEffect(() => {
   axios.post(`http://localhost:5000/getsub/get`, { Subject: "math", Sem:localStorage.getItem('Sem') })
     .then((response) => {
       console.log(response.data);
-      setSubmath(response.data);
+      const { info, disinfo } = response.data;
+      setSubmath(info);
+      setdisSubmath(disinfo);
     })
     .catch((error) => {
       console.error("Error fetching data:", error);
@@ -41,7 +50,9 @@ useEffect(() => {
   axios.post(`http://localhost:5000/getsub/get`, { Subject: "PHY", Sem:localStorage.getItem('Sem') })
     .then((response) => {
       console.log(response.data);
-      setSubphy(response.data);
+      const { info, disinfo } = response.data;
+      setSubphy(info);
+      setdisSubphy(disinfo);
     })
     .catch((error) => {
       console.error("Error fetching data:", error);
@@ -49,7 +60,9 @@ useEffect(() => {
   axios.post(`http://localhost:5000/getsub/get`, { Subject: "CS", Sem:localStorage.getItem('Sem') })
     .then((response) => {
       console.log(response.data);
-      setSubcs(response.data);
+      const { info, disinfo } = response.data;
+      setSubcs(info);
+      setdisSubcs(disinfo);
     })
     .catch((error) => {
       console.error("Error fetching data:", error);
@@ -58,11 +71,15 @@ useEffect(() => {
     .then((response) => {
       console.log(response.data);
       setSubec(response.data);
+      const { info, disinfo } = response.data;
+      setSubec(info);
+      setdisSubec(disinfo);
     })
     .catch((error) => {
       console.error("Error fetching data:", error);
     });
 }, []);
+
 
 useEffect(() => {
   console.log("sub in use effect", subhss);
@@ -91,12 +108,24 @@ useEffect(() => {
   };
   function Options({ options }) {
     console.log(options); // Log the options array to the console
-    return (
-      options.map(option => (
-        <option key={option.SubCode} value={option.SubCode}>{option.SubCode}
+    return ( <>
+      <option selected value="" disabled>Select an option</option>
+      {options.map(option => (
+        <option key={option.SubCode} value={option.SubCode}>
+          {option.SubCode}
         </option>
-      ))
-    );
+      ))}
+    </>);
+  }
+  function Optionsdis({ options }) {
+    console.log(options); // Log the options array to the console
+    return ( <>
+      {options.map(option => (
+        <option key={option.SubCode} value={option.SubCode}  disabled>
+          {option.SubCode}
+        </option>
+      ))}
+    </>);
   }
   
 const onChange = (e)=>{
@@ -108,7 +137,7 @@ const onChange = (e)=>{
     
     <div className="container">
       
-    <form className="row g-3 needs-validation" noValidate>
+      <form className="needs-validation form-inline p-3" style={{border: "5px solid black"}} noValidate>
     <div className="col-md-4">
     <label htmlFor="validationCustom08" className="form-label">Student Id</label>
     <input type="number" name="Sid" className="form-control" onChange={onChange} id="validationCustom06" required/>
@@ -134,12 +163,13 @@ const onChange = (e)=>{
   <div className="col-md-3">
     <label htmlFor="validationCustom01" className="form-label">Math Subject</label>
     <select
-    value={data}
+    value={info.SUB1}
     id="validationCustom01"
   onChange={onOptionChangeHandler} 
   name="SUB1"
   className="form-control form-select" required>
   <Options options={submath} />
+  <Optionsdis options={dissubmath} />
 </select>
     <div className="invalid-feedback">
       Please select a Subject
@@ -148,12 +178,13 @@ const onChange = (e)=>{
   <div className="col-md-3">
     <label htmlFor="validationCustom02" className="form-label">Hss Subject</label>
     <select
-    value={data}
+    value={info.SUB2}
     id="validationCustom02"
   onChange={onOptionChangeHandler}
   name="SUB2"
   className="form-control form-select" required>
   <Options options={subhss} />
+  <Optionsdis options={dissubhss} />
 </select>
     <div className="invalid-feedback">
       Please select a Subject
@@ -162,12 +193,13 @@ const onChange = (e)=>{
   <div className="col-md-3">
     <label htmlFor="validationCustom03" className="form-label">Computer Subject</label>
     <select
-    value={data}
+    value={info.SUB3}
     id="validationCustom03"
   onChange={onOptionChangeHandler}
   name="SUB3"
   className="form-control form-select" required>
   <Options options={subcs} />
+  <Optionsdis options={dissubcs} />
 </select>
     <div className="invalid-feedback">
       Please select a Subject
@@ -176,12 +208,13 @@ const onChange = (e)=>{
   <div className="col-md-3">
     <label htmlFor="validationCustom04" className="form-label">Electrical Subject</label>
     <select
-    value={data}
+    value={info.SUB4}
     id="validationCustom04"
   onChange={onOptionChangeHandler}
   name="SUB4"
   className="form-control form-select" required>
   <Options options={subec} />
+  <Optionsdis options={dissubec} />
 </select>
     <div className="invalid-feedback">
       Please select a Subject
@@ -190,12 +223,13 @@ const onChange = (e)=>{
   <div className="col-md-3">
     <label htmlFor="validationCustom05" className="form-label">Physics Subject</label>
     <select
-    value={data}
+    value={info.SUB5}
     id="validationCustom05"
   onChange={onOptionChangeHandler}
   name="SUB5"
   className="form-control form-select" required>
   <Options options={subphy} />
+  <Optionsdis options={dissubphy} />
 </select>
     <div className="invalid-feedback">
       Please select a Subject

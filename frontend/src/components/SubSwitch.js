@@ -142,7 +142,7 @@ return (
     
   <div className="container">
     
-  <form className="row g-3 needs-validation" noValidate>
+  <form className="needs-validation form-inline p-3" style={{border: "5px solid black"}} noValidate>
   <div className="col-md-4">
   <label htmlFor="validationCustom08" className="form-label">Student Id</label>
   <input type="number" name="Sid" className="form-control" onChange={onChange} id="validationCustom08" required/>
@@ -158,7 +158,7 @@ return (
   </div>
 </div>
 
-<div className="col-md-6">
+<div className="col-md-2">
   <label htmlFor="validationCustom06" className="form-label">Semister</label>
   <input type="number" name="Sem" className="form-control" onChange={onChange} id="validationCustom06" required/>
   <div className="invalid-feedback">
