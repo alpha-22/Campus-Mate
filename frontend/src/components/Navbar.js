@@ -22,6 +22,9 @@ const Navbar = () => {
             <li class="nav-item">
             <Link class="nav-link active" aria-current="page" to="/">Home</Link>
             </li>
+            <li class="nav-item">
+            <Link class="nav-link active" aria-current="page" to="/faculty">Faculty</Link>
+            </li>
             {localStorage.getItem("Sid")?<li class="nav-item">
             <Link class="nav-link" to="/subpro">Profile</Link>
             </li>:<li class="nav-item">

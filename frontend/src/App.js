@@ -11,6 +11,7 @@ import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import SubSwitch from "./components/SubSwitch";
+import Faculty from "./components/Faculty";
 
 function App() {
   return (<>
@@ -24,6 +25,9 @@ function App() {
           </Route>
     <Route exact path='/'
           element={<Home/>}>
+          </Route>
+    <Route exact path='/faculty'
+          element={<Faculty/>}>
           </Route>
     <Route exact path='/login'
           element={<Login/>}>
