@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const { FacultyStudents } = require('../models');
 
-router.get('/:facultyId/:subjectId', async (req, res) => {
+router.get('/api/faculty/:facultyId/subjects/:subjectId/students', async (req, res) => {
   const { facultyId } = req.params;
   
   try {

@@ -10,7 +10,7 @@ const Faculty = (props) => {
     const [facultyData, setFacultyData] = useState(null);
   
     const handleLogin = () => {
-      axios.post('http://localhost:5000/api/login', { faculty_id: facultyId, password })
+      axios.post('http://localhost:5000/faculty/api/login', { faculty_id: facultyId, password })
         .then(res => {
           if (res.data.success) {
             setFacultyData(res.data.faculty);

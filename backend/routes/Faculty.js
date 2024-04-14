@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const { Faculty } = require('../models');
 
-router.post('/', async (req, res) => {
+router.post('/api/login', async (req, res) => {
   const { faculty_id, password } = req.body;
   
   try {
