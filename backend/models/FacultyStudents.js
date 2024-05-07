@@ -10,13 +10,20 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.INTEGER,
           allowNull: false
         },
-        subject_id: {
-          type: DataTypes.INTEGER,
-          allowNull: false
+        subject_name: {
+          type: DataTypes.STRING
+        },
+        notified: {
+          type: DataTypes.INTEGER
         },
         student_id: {
-          type: DataTypes.INTEGER,
-          allowNull: false
+          type: DataTypes.INTEGER
+        },
+        faculty_name: {
+          type: DataTypes.STRING
+        },
+        student_name: {
+          type: DataTypes.STRING
         }
       });
       

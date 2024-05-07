@@ -10,7 +10,15 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.INTEGER,
           allowNull: false
         },
-        subject_id: {
+        subject_name: {
+          type: DataTypes.STRING,
+          allowNull: false
+        },
+        subject_code: {
+          type: DataTypes.STRING,
+          allowNull: false
+        },
+        semester: {
           type: DataTypes.INTEGER,
           allowNull: false
         }

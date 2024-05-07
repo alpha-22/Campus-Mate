@@ -10,20 +10,20 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.INTEGER,
           allowNull: false
         },
-        subject_id: {
-          type: DataTypes.INTEGER,
+        subject_name: {
+          type: DataTypes.STRING,
           allowNull: false
         },
         day: {
           type: DataTypes.STRING,
           allowNull: false
         },
-        start_time: {
+        time_slot: {
           type: DataTypes.TIME,
           allowNull: false
         },
-        end_time: {
-          type: DataTypes.TIME,
+        classroom: {
+          type: DataTypes.STRING,
           allowNull: false
         }
       });

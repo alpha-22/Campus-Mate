@@ -28,8 +28,9 @@ function Dashboard({ facultyData }) {
   const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/faculty/${facultyData.faculty_id}/subjects`)
+    axios.get(`http://localhost:5000/faculty/subjects/api/faculty/${facultyData.faculty_id}/subjects`)
       .then(res => {
+        console.log(res.data.subjects);
         setSubjects(res.data.subjects);
       })
       .catch(err => {
@@ -40,8 +41,9 @@ function Dashboard({ facultyData }) {
   useEffect(() => {
     if (activeTab === 'students' && subjects.length > 0) {
       const subjectId = subjects[0].id;
-      axios.get(`http://localhost:5000/api/faculty/${facultyData.faculty_id}/subjects/${subjectId}/students`)
+      axios.get(`http://localhost:5000/faculty/students/api/faculty/${facultyData.faculty_id}/subjects/${subjectId}/students`)
         .then(res => {
+          console.log(res.data.students);
           setStudents(res.data.students);
         })
         .catch(err => {
@@ -52,7 +54,7 @@ function Dashboard({ facultyData }) {
 
   useEffect(() => {
     if (activeTab === 'timetable') {
-      axios.get(`http://localhost:5000/api/faculty/${facultyData.faculty_id}/timetable`)
+      axios.get(`http://localhost:5000/faculty/timetable/api/faculty/${facultyData.faculty_id}/timetable`)
         .then(res => {
           setTimetable(res.data.timetable);
         })
@@ -65,7 +67,7 @@ function Dashboard({ facultyData }) {
  
 
     const handleDeleteSlot = (id) => {
-      axios.delete(`http://localhost:5000/api/timetable/${id}`)
+      axios.delete(`http://localhost:5000/faculty/timetable/api/timetable/${id}`)
       .then(() => {
         setTimetable(timetable.filter(slot => slot.id !== id));
       })
@@ -87,7 +89,7 @@ function Dashboard({ facultyData }) {
       case 'profile':
         return (
           <div className="tab-content">
-            <h2>Welcome, {facultyData.faculty_name}!</h2>
+            <h2>Welcome, {facultyData.name}!</h2>
             <p>Faculty ID: {facultyData.faculty_id}</p>
             <p>Department: {facultyData.department}</p>
             <p>Email: {facultyData.email}</p>
@@ -95,24 +97,24 @@ function Dashboard({ facultyData }) {
             <p>Designation: {facultyData.designation}</p>
           </div>
         );
-      case 'subjects':
-        return (
-          <div className="tab-content">
-            <h2>Subjects</h2>
-            <ul>
-              {subjects.map(subject => (
-                <li key={subject.id}>{subject.subject_name} - {subject.subject_code}</li>
-              ))}
-            </ul>
-          </div>
-        );
+        case 'subjects':
+          return (
+            <div className="tab-content">
+              <h2>Subjects</h2>
+              <ul>
+                {subjects.map(subject => (
+                  <li key={subject.id}>{subject.subject_name} - {subject.subject_code}</li>
+                ))}
+              </ul>
+            </div>
+          );
       case 'students':
         return (
           <div className="tab-content">
             <h2>Students</h2>
             <ul>
               {students.map(student => (
-                <li key={student.id}>{student.name} - {student.name} {student.student_name}</li>
+                <li key={student.id}>{student.student_id} - {student.name} {student.student_name}</li>
               ))}
             </ul>
           </div>
